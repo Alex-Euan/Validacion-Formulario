@@ -14,10 +14,17 @@ const validarFormulario = (e) => {
     switch (expresiones, e.target.name) {
         case "usuario":
             // accedemos al objeto y hacemos comparamos con "TEST(LO QUE QUEREMOS COMPARAR)"
-            if (expresiones.usuario.test(usuario.value)) {
-                console.log('usuario correcto');
+            if (expresiones.usuario.test(e.target.value)) {
+                document.getElementById('grupo__usuario').classList.add('formulario__grupo-correcto');
+                document.getElementById('grupo__usuario').classList.remove('formulario__grupo-incorrecto');
+                document.querySelector('#grupo__usuario i').classList.add('fa-check-circle');
+                document.querySelector('#grupo__usuario i').classList.remove('fa-circle-xmark');
             } else {
-                console.log('usuario incorrecto');
+                document.getElementById('grupo__usuario').classList.add('formulario__grupo-incorrecto');
+                document.getElementById('grupo__usuario').classList.remove('formulario__grupo-correcto');
+                document.querySelector('#grupo__usuario i').classList.add('fa-circle-xmark');
+                document.querySelector('#grupo__usuario i').classList.remove('fa-check-circle');
+/*                 document.querySelector('formulario__input-error').classList.add('.formulario__input-error-activo'); */
             }
             break;
     
