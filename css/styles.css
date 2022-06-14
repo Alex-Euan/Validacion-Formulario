@@ -122,7 +122,7 @@ main {
     display: none;
 }
 
-.formulario__mensaje-exito-activado {
+.formulario__mensaje-exito-activo {
     display: block;
 }
 /* ---- Estilos para Validacion ----- */
