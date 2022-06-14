@@ -15,11 +15,12 @@ const campos = {
     nombre: false,
     password: false,
     correo: false,
-    telefono: false
+    telefono: false,
+    terminos: false
 }
 
 const validarFormulario = (e) => {
-    switch (expresiones, e.target.name) {
+    switch (e.target.name) {
         case "usuario":
             validarCampo(expresiones.usuario, e.target, 'usuario');
             break;
@@ -55,14 +56,14 @@ const validarCampo = (expresion, input, campo) => {
         document.querySelector(`#grupo__${campo} i`).classList.add('fa-check-circle');
         document.querySelector(`#grupo__${campo} i`).classList.remove('fa-circle-xmark');
         document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo');
-        campos[campos] = true;
+        campos[campo] = true;
     } else {
         document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto');
         document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
         document.querySelector(`#grupo__${campo} i`).classList.add('fa-circle-xmark');
         document.querySelector(`#grupo__${campo} i`).classList.remove('fa-check-circle');
         document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo');
-        campos[campos] = false;
+        campos[campo] = false;
   }
 }
 
@@ -86,6 +87,14 @@ const validarPassword = () => {
         campos['password'] = true;
     }
 }
+const validarTerminos = () => {
+    const terminos = document.getElementById('terminos');
+    if (terminos.checked == false) {
+        document.querySelector('#grupo__terminos .formulario__input-error').classList.add('formulario__input-error-activo'); 
+    } else {
+        document.querySelector('#grupo__terminos .formulario__input-error').classList.remove('formulario__input-error-activo'); 
+    }
+}
 
 //con forEach ejecuta codigo por cada input
 inputs.forEach((input) => {
@@ -96,41 +105,22 @@ inputs.forEach((input) => {
 });
 
 // FUNCION DE TIPO FLECHA () => {}''
-formulario.addEventListener('submit', (e) => {
+  formulario.addEventListener('submit', (e) => {
     e.preventDefault();
+    validarTerminos();   
     
-    
-    const terminos = document.getElementById('terminos');
-     if (campos.usuario && campos.nombre && campos.password && campos.correo && terminos.checked && campos.telefono) 
-     {
+    if(campos.usuario && campos.nombre && campos.password && campos.correo && campos.telefono && terminos.checked ){
         formulario.reset();
-        
         document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
-        setTimeout(() => {
-			document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
-		}, 5000);
+         setTimeout(() => {
+             document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
+         }, 5000);
 
-        document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
-			icono.classList.remove('formulario__grupo-correcto');
-		});
+         document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
+            icono.classList.remove('formulario__grupo-correcto');
+        });
+        document.getElementById('formulario__mensaje').classList.remove('formulario__mensaje-activo');
     } else {
 		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
 	}
-
-   /*  const terminos = document.getElementById('terminos');
-	if(campos.usuario && campos.nombre && campos.password && campos.correo && campos.telefono && terminos.checked ){
-		formulario.reset();
-
-		document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
-		setTimeout(() => {
-			document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
-		}, 5000);
-
-		document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
-			icono.classList.remove('formulario__grupo-correcto');
-		});
-	} else {
-		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
-	} */
-
 });
